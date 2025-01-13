@@ -28,15 +28,12 @@ app.use(fileUpload({
 	tempFileDir: "/tmp/",
 }))
 
-// app.use(
-//     cors({
-//       origin: "https://studynotion-client-jet.vercel.app", // Deployed frontend URL
-//       methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-//       credentials: true, // If sending cookies
-//     })
-// );
-
-app.use(cors())
+app.use(
+	cors({
+		origin: "*",
+		credentials: true,
+	})
+);
 
 
 cloudinary.cloudinaryConnect()
