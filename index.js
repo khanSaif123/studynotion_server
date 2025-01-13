@@ -30,11 +30,11 @@ app.use(fileUpload({
 
 app.use(
     cors({
-      origin: "http://localhost:3000", // Your frontend URL
+      origin: "https://studynotion-client-jet.vercel.app", // Deployed frontend URL
       methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
       credentials: true, // If sending cookies
     })
-  );
+);
 
 
 cloudinary.cloudinaryConnect()
