@@ -1,7 +1,7 @@
 const express = require('express')
 const database = require('./config/database');
 const cookieParser = require('cookie-parser');
-const cloudinary = require('../server/config/cloudinary')
+const cloudinary = require('./config/cloudinary')
 const fileUpload = require('express-fileupload')
 const cors = require('cors')
 
@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 5000;
 database.connect()
 
 // routes
-const userRoutes = require('../server/routes/user')
-const profileRoutes = require('../server/routes/profile')
-const courseRoutes = require('../server/routes/Courses')
-const contactusRoutes = require('../server/routes/Contact')
-const paymentRoutes = require('../server/routes/Payment')
+const userRoutes = require('./routes/user')
+const profileRoutes = require('./routes/profile')
+const courseRoutes = require('./routes/Courses')
+const contactusRoutes = require('./routes/Contact')
+const paymentRoutes = require('./routes/Payment')
 
 // middleWares
 app.use(express.json())
