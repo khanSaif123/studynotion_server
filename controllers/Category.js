@@ -4,70 +4,59 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max)
   }
 // create category handler.
-exports.createCategories = async (req, res) => {
+exports.createCategories = async (req, res) =>{
     try {
-        // Fetch data from the request body
-        const { name, description } = req.body;
+        // fetch data.
+        const {name, description} = req.body;
 
-        // Validate required fields
-        if (!name || !description) {
+        // validate.
+        if(!name || !description){
             return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-            });
+                success:false,
+                message:"All fields are required"
+            })
         }
 
-        // Create new category in the DB
-        const categoryDetails = await Category.create({
+        // create new entry in the db.
+        const CategorysDetails = await Category.create({
             name,
-            description,
-        });
+            description
+        })
 
-        console.log("New Category", categoryDetails);
+        console.log("New Category", CategorysDetails)
 
-        // Return success response
-        return res.status(201).json({
-            success: true,
-            message: "Category created successfully",
-            data: categoryDetails,
-        });
+        // return success response.
+        return res.status(400).json({
+            success:true,
+            message:"Category created successfully"
+        })
     } catch (error) {
         return res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+            success:false,
+            message:error.message
+        })
     }
-};
-
+}
 
 // get all category from db.
-exports.showAllCategories = async (req, res) => {
+exports.showAllCategories = async (req, res) =>{
     try {
-        // Get all categories using the find method
-        const allCategories = await Category.find({}, { name: true, description: true });
+        // get all using find method
+        const allCategorys = await Category.find({}, {name:true, description:true})
+        console.log("allCategorys", allCategorys)
 
-        // Convert names to lowercase and replace spaces with hyphens
-        const formattedCategories = allCategories.map((category) => ({
-            name: category.name.replace(/\s+/g, "-").toLowerCase(),
-            description: category.description,
-        }));
-
-        console.log("All Categories:", formattedCategories);
-
-        // Return success response
         return res.status(200).json({
             success: true,
-            message: "Fetched category details from DB successfully",
-            data: formattedCategories,
-        });
+            message:"Fetching category detail form DB successfully",
+            data:allCategorys
+        })
     } catch (error) {
         return res.status(500).json({
-            success: false,
-            message: "Something went wrong while fetching category data from the DB.",
-        });
+            success:false,
+            message: "Somthing went wrong while fetching the category data from DB."
+        })
     }
-};
-
+}
 
 // user search for course
 exports.categoryPageDetails = async (req, res) => {
